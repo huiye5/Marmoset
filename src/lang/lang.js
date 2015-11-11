@@ -58,7 +58,7 @@
     });
 
     lang.isNaN = function (obj) {
-      return obj !== obj;
+        return obj !== obj;
     };
 
     var _isNumber = lang.isNumber;
@@ -83,6 +83,9 @@
     }
 
     function keys(obj){
+        // todo
+        // ie9 有一些属性不能通过 for in 查出
+        // 需要解决
         var _keys = [];
         lang.each(obj, function (v, i) {
             _keys.push(i);

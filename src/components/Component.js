@@ -29,7 +29,7 @@
     };
 
     Component.prototype.renderToString = function () {
-      return this.content;
+        return this.content;
     };
 
     Component.extend = function (options) {
@@ -41,5 +41,4 @@
 
     scope.Component = Component;
 })(window, lang);
-
 
