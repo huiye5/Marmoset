@@ -245,9 +245,8 @@
 
     //
     // String
-    //c.trim = nativeTrim ?
-    //    function (str) { return nativeTrim.call(str); } :
-    //    trim;
-    c.trim = nativeTrim || trim;
+    c.trim = nativeTrim ?
+        function (str) { return nativeTrim.call(str); } :
+        trim;
 
 })(window);
