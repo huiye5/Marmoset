@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="../../lang/lang.js"></script>
+    <script src="../../core/io/template.js"></script>
     <script src="../../components/Component.js"></script>
     <script src="WebExcel.js"></script>
     <script src="Model.js"></script>
+    <script src="WebExcelModel.js"></script>
+    <link rel="stylesheet" href="web-excel.css" />
+
 </head>
 <body>
 
@@ -15,13 +19,9 @@
 
     var webExcel = new WebExcel({
 
-        node: document.querySelector('body'),
+        parent: document.querySelector('body'),
 
-        model: Model.dataList(10),
-
-        render: function () {
-            this.content = this.node.outerHTML;
-        }
+        model: new WebExcelModel()
     });
 
     webExcel.render();

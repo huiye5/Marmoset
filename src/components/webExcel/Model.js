@@ -17,7 +17,8 @@
                 innerCode: lang.randomRange(10, 0, 10).join(''),
                 orderCode: lang.randomRange(6, 0, 10).join(''),
                 // ascii 码中 A-Z及 a-z
-                userCommodityCode: lang.integerListToString(lang.randomRange(20, 49, 123)),
+                userCommodityCode:
+                    lang.integerListToString(lang.randomRange(20, 65, 123)),
                 date: new Date().toLocaleDateString()
             };
         },

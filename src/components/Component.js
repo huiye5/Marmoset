@@ -49,12 +49,15 @@
     };
 
     Component.prototype.attachToDOM = function (parent) {
-        // todo parent.appendChild(this.node);
+        parent = parent || this.parent;
+        if ( parent && parent.nodeType === 1) {
+            parent.appendChild(this.node);
+        }
         return this.afterRender(this.node);
     };
 
     Component.prototype.renderToString = function () {
-        return this.content;
+        return this.content || (this.content = this.node && this.node.outerHTML || '');
     };
 
     Component.extend = function (options) {
@@ -68,6 +71,8 @@
 
         lang.inherit(Component, Child);
         lang.extend(Child.prototype, options);
+        Child.extend = Component.extend;
+
         return Child;
     };
 

@@ -21,7 +21,6 @@
         // String
         nativeTrim = String.prototype.trim;
 
-
     // ==========
     // If len ≤ +0, return +0.
     // If len is +∞, return 253-1.
