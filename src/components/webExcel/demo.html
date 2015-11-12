@@ -6,8 +6,24 @@
     <script src="../../lang/lang.js"></script>
     <script src="../../components/Component.js"></script>
     <script src="WebExcel.js"></script>
+    <script src="Model.js"></script>
 </head>
 <body>
 
 </body>
+<script type="text/javascript">
+
+    var webExcel = new WebExcel({
+
+        node: document.querySelector('body'),
+
+        model: Model.dataList(10),
+
+        render: function () {
+            this.content = this.node.outerHTML;
+        }
+    });
+
+    webExcel.render();
+</script>
 </html>
