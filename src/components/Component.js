@@ -16,11 +16,11 @@
     };
 
     Component.prototype.beforeRender = function (node) {
-
+        return this.node;
     };
 
     Component.prototype.afterRender = function (node) {
-
+        return this.node;
     };
 
     Component.prototype.attachToDOM = function (parent) {

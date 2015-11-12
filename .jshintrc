@@ -1,6 +1,7 @@
 {
     "bitwise":true,
     "eqeqeq": true,
+    "curly": true,
     "es3":true,
     "forin": true,
     "freeze": true,
