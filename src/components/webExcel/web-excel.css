@@ -4,6 +4,7 @@
     margin: 10px;
     display: table;
     border-collapse:collapse;
+    text-align: center;
 }
 
 .web-excel > .list-item {
@@ -14,4 +15,11 @@
     display: table-cell;
     padding: 6px;
     border: 1px solid #f5f5f5;
+}
+
+.web-excel .cell-input {
+    border:2px solid #eee;
+    outline: none;
+    padding: 4px 0;
+    text-align: center;
 }

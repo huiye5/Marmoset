@@ -43,27 +43,23 @@
 
         renderOne: function (model, index) {
             var div = this.doc.createElement('div');
-            var html = [];
-            var keys = lang.keys(model);
             var cell = null;
             var cells = [];
 
             this.cells.push(cells);
 
-            lang.forEach(keys, function (prop, idx) {
+            lang.forEach(this.model.keys, function (prop, idx) {
                 cell = new Cell({
                     y: index, x: idx,
-                    model: {name: prop, value: model[prop]}
+                    model: model, name: prop
                 });
 
                 cell.render();
-                html.push(cell.renderToString());
                 cells.push(cell);
+                div.appendChild(cell.node);
             }, this);
 
-            div.innerHTML = html.join('\n');
             div.setAttribute('class', 'list-item');
-
             return div;
         },
 
@@ -79,9 +75,28 @@
         },
 
         bindEdit: function ($node) {
-            $node.on('click', '.cell', function (e) {
-                console.log(e.target);
+            var _this = this;
+
+            $node.on('dblclick', '.cell', function (e, data) {
+                var c = _this.getCoords(e.target);
+                // 取得当前单元格数据
+                _this.replaceToInput(c.x, c.y);
+                console.log(data);
             }, 123);
+
+            $node.on('blur', 'input', function (e) {
+                var c = _this.getCoords(e.target.parentNode);
+                _this.replaceToValue(c.x, c.y, e.target.value);
+            });
+        },
+
+        getCoords: function (node) {
+            var c = node.getAttribute('data-mark').split(':');
+            return {x: lang.toInteger(c[0]), y: lang.toInteger(c[1])};
+        },
+
+        getCellsWithCoors: function (x, y) {
+            return this.cells[y][x];
         },
 
         bindDragCopy: function ($node) {
@@ -90,6 +105,14 @@
 
         bindMoveCopy: function ($node) {
 
+        },
+
+        replaceToInput: function (x, y) {
+            this.getCellsWithCoors(x, y).replaceToInput();
+        },
+
+        replaceToValue: function (x, y, v) {
+            this.getCellsWithCoors(x, y).saveModel(v);
         }
     });
 
