@@ -6,9 +6,10 @@
     <script src="../../lang/lang.js"></script>
     <script src="../../core/io/template.js"></script>
     <script src="../../components/Component.js"></script>
-    <script src="WebExcel.js"></script>
-    <script src="Model.js"></script>
-    <script src="WebExcelModel.js"></script>
+    <script src="constructor/Cell.js"></script>
+    <script src="constructor/WebExcel.js"></script>
+    <script src="constructor/Model.js"></script>
+    <script src="constructor/WebExcelModel.js"></script>
     <link rel="stylesheet" href="web-excel.css" />
 
 </head>
@@ -21,7 +22,7 @@
 
         parent: document.querySelector('body'),
 
-        model: new WebExcelModel()
+        model: new WebExcelModel(10)
     });
 
     webExcel.render();
