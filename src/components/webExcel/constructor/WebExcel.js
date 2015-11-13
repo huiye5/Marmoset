@@ -1,4 +1,4 @@
-;(function (exports, Component, Cell, lang) {
+;(function (exports, Component, Cell, lang, query, event) {
 
 
     exports.WebExcel = Component.extend({
@@ -12,14 +12,15 @@
             // 创建 node
             this.node = this.doc.createElement('div');
             this.node.setAttribute('class', 'web-excel');
+            this.$node = query(this.node);
         },
 
         beforeRender: function (node) {
-            console.log('beforeRender', node);
+            // console.log('beforeRender', node);
         },
 
         afterRender: function (node) {
-            console.log('afterRender', node);
+            // console.log('afterRender', node);
         },
 
         render: function () {
@@ -35,7 +36,7 @@
             this.content = this.node.outerHTML;
 
             this.attachToDOM(this.parent);
-            this.event(this.node);
+            this.event(this.$node);
 
             return this.node;
         },
@@ -66,28 +67,30 @@
             return div;
         },
 
-        event: function (node) {
+        event: function ($node) {
             // todo 点击编辑事件
-            this.bindEdit(node);
+            this.bindEdit($node);
 
             // todo 选择复制事件
-            this.bindDragCopy(node);
+            this.bindDragCopy($node);
 
             // todo 鼠标选择复制事件
-            this.bindMoveCopy(node);
+            this.bindMoveCopy($node);
         },
 
-        bindEdit: function (node) {
+        bindEdit: function ($node) {
+            $node.on('click', '.cell', function (e) {
+                console.log(e.target);
+            }, 123);
+        },
+
+        bindDragCopy: function ($node) {
 
         },
 
-        bindDragCopy: function (node) {
-
-        },
-
-        bindMoveCopy: function (node) {
+        bindMoveCopy: function ($node) {
 
         }
     });
 
-})(window, Component, Cell, lang);
+})(window, Component, Cell, lang, query, event);
