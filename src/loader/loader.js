@@ -35,18 +35,18 @@
         loader = {};
 
     function ImportScript(uri, done, fail) {
-        this.uri = uri + '.js';
+        this.uri = uri;
         this._done = done;
         this._fail = fail;
     }
 
     ImportScript.prototype.done = function () {
         this._done();
-        head.removeChild(this.node);
+        //head.removeChild(this.node);
     };
 
     ImportScript.prototype.fail = function () {
-        this._fail();
+        if(typeof this._fail === 'function'){ this._fail(); }
         throw new Error('failed to load ' + this.uri);
     };
 
