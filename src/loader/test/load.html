@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../module.js"></script>
+    <script src="../loader.js"></script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    loader.use('./test/a', ['./test/c'], function (b,c) {
+        console.log(b, c)
+    })
+</script>
+</html>

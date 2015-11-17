@@ -1,10 +1,26 @@
 ;(function (exports, lang) {
 
-    var componentDefaults = [
+    var componentsDefaults = [
         'x', 'y', 'model', 'content', 'node', 'parent', 'width', 'height',
         'initialize', 'beforeRender', 'afterRender', 'attachToDOM',
         'beforeRender', 'renderToString', 'render'
     ];
+
+    function extend (options) {
+        var Child = function (options) {
+            if (!(this instanceof Child)) {
+                throw new Error('Constructor can\'t immediate called');
+            }
+            this._extendFromOptions(options);
+            this.initialize.apply(this, arguments);
+        };
+
+        lang.inherit(this, Child);
+        lang.extend(Child.prototype, options);
+        Child.extend = extend;
+
+        return Child;
+    }
 
     function Component(options) {
         if(!(this instanceof Component)){
@@ -18,10 +34,10 @@
         this.initialize.apply(this, arguments);
     }
 
-    Component.prototype.__extendFromOptions = function (options) {
+    Component.prototype._extendFromOptions = function (options) {
         if (!lang.isObject(options)) { return options; }
 
-        lang.forEach(componentDefaults, function (v) {
+        lang.forEach(componentsDefaults, function (v) {
             if (options.hasOwnProperty(v)){
                 this[v] = options[v];
             }
@@ -31,7 +47,7 @@
     };
 
     Component.prototype.initialize = function (options) {
-        console.log('Component initialized');
+        // console.log('Component initialized');
     };
 
     Component.prototype.render = function (model) {
@@ -60,22 +76,9 @@
         return this.content || (this.content = this.node && this.node.outerHTML || '');
     };
 
-    Component.extend = function (options) {
-        var Child = function (_options) {
-            if (!(this instanceof Child)) {
-                throw new Error('Constructor can\'t immediate called');
-            }
-            this.__extendFromOptions(_options);
-            this.initialize.apply(this, arguments);
-        };
-
-        lang.inherit(Component, Child);
-        lang.extend(Child.prototype, options);
-        Child.extend = Component.extend;
-
-        return Child;
-    };
+    Component.extend = extend;
 
     exports.Component = Component;
+
 })(window, lang);
 
