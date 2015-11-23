@@ -2,21 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Test</title>
     <script type="text/javascript" src="promise.js"></script>
     <script type="text/javascript">
-    	function timeout(ms) {
-  			return new Promise(function (resolve, reject){
-    			setTimeout(resolve, ms, 'done');
-  			});
-			}
+        var getData100 = function(){
+            //debugger
+            return Promise(function(resolve,reject){
+                setTimeout(function(){
+                    resolve('100ms');
+                },100);
+            });
+        }
 
-			timeout(100).then((value) => {
-  			console.log(value);
-			});
+        var getData200 = function(){
+            return Promise(function(resolve,reject){
+                setTimeout(function(){
+                    reject('200ms');
+                },200);
+            });
+        }
+
+        getData100().then(function(data){
+            console.log(data); // 100ms
+            return getData200();
+        }).then(function(data){
+            console.log(data); // 200ms
+            return data + data;
+        },function(data){
+            console.log('错误：'+data); // 200ms
+            return data + data;
+        }).then(function(data){
+            console.log(data) // 200ms200ms
+        });
     </script>
 </head>
 <body>
-
 </body>
 </html>
